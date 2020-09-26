@@ -1,4 +1,4 @@
-package easywebc
+package easyhtml
 
 import (
 	"strings"

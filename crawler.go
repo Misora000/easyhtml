@@ -1,4 +1,4 @@
-package easywebc
+package easyhtml
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ type Tokenizer struct {
 // Attrs is the attributes of a token.
 type Attrs map[string]string
 
-// NewTokenizer .
+// NewTokenizer new a tokenizer.
 func NewTokenizer(body io.Reader) *Tokenizer {
 	z := html.NewTokenizer(body)
 	z.NextIsNotRawText()

@@ -1,6 +1,6 @@
-# Easy Web Crawler
+# Easy HTML Crawler
 
-A easy-to-use website crawler based on `golang.org/x/net/html`.  
+A easy-to-use HTML crawler based on `golang.org/x/net/html`.  
 Find what you want intuitively, such as:
 ```
 JumpToTag(tag string) (a Attrs, eof bool)
