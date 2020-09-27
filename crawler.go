@@ -45,6 +45,28 @@ func (z *Tokenizer) JumpToTag(tag string) (a Attrs, eof bool) {
 	return
 }
 
+// JumpToTagAttr move the tokenizer pointer to the target tag and return its attr.
+func (z *Tokenizer) JumpToTagAttr(tag, attrName, attrVal string) (a Attrs, eof bool) {
+	for {
+		token := z.z.Next()
+		if token == html.ErrorToken {
+			eof = true
+			return
+		}
+
+		name, hasAttr := z.z.TagName()
+		if string(name) != tag || !hasAttr {
+			continue
+		}
+
+		a = z.getAttrs()
+		if val, exists := a[attrName]; exists && val == attrVal {
+			break
+		}
+	}
+	return
+}
+
 // JumpToID move the tokenizer pointer to the target id and return its attr.
 func (z *Tokenizer) JumpToID(tag, id string) (a Attrs, eof bool) {
 	for {
@@ -93,6 +115,17 @@ func (z *Tokenizer) JumpToClass(tag, class string) (a Attrs, eof bool) {
 			}
 		}
 	}
+}
+
+// GetNextText g
+func (z *Tokenizer) GetNextText() (text string, eof bool) {
+	token := z.z.Next()
+	if token == html.ErrorToken {
+		eof = true
+		return
+	}
+	text = string(z.z.Text())
+	return
 }
 
 // ExpandToken expand the current token as the raw text.
